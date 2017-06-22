@@ -3,6 +3,7 @@
         "list": []
     },
     "editable": true,
+    "gnetId": null,
     "hideControls": true,
     "id": 6,
     "links": [
@@ -30,7 +31,6 @@
             "type": "dashboards"
         }
     ],
-    "originalTitle": "ORES (labs)",
     "rows": [
         {
             "collapse": false,
@@ -98,6 +98,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -182,6 +183,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -231,7 +233,7 @@
                     "lines": true,
                     "linewidth": 1,
                     "links": [],
-                    "nullPointMode": "connected",
+                    "nullPointMode": "null as zero",
                     "percentage": false,
                     "pointradius": 5,
                     "points": false,
@@ -284,6 +286,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -368,6 +371,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "transparent": false,
@@ -448,6 +452,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -531,6 +536,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -605,6 +611,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "transparent": false,
@@ -687,6 +694,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "transparent": false,
@@ -777,6 +785,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -860,6 +869,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -952,6 +962,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -1049,6 +1060,7 @@
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
+                        "sort": 0,
                         "value_type": "cumulative"
                     },
                     "type": "graph",
@@ -1086,7 +1098,7 @@
         "list": []
     },
     "time": {
-        "from": "now-24h",
+        "from": "2016-11-03T17:05:52.519Z",
         "to": "now"
     },
     "timepicker": {
@@ -1122,5 +1134,5 @@
     },
     "timezone": "utc",
     "title": "ORES (labs)",
-    "version": 16
+    "version": 17
 }
