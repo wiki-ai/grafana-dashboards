@@ -3,4 +3,4 @@ This repo is a dump of the grafana dashboard's current settings, you can fetch t
 
   php fetch.php
 
-**__This repo is not for changing the settings of our Grafana Dashboards!!! Please use (this)[https://grafana-admin.wikimedia.org/] instead!__**
+**__This repo is not for changing the settings of our Grafana Dashboards!!! Please use [this](https://grafana-admin.wikimedia.org/) instead!__**
