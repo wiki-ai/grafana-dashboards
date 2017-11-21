@@ -65,7 +65,7 @@
     "refresh": false,
     "rows": [
         {
-            "collapse": false,
+            "collapse": true,
             "height": "250px",
             "panels": [
                 {
@@ -108,13 +108,25 @@
                         {
                             "hide": false,
                             "refId": "K",
-                            "target": "alias(scaleToSeconds(sumSeries(ores.scb*.scores_request.count, ores.scb1*.precache_request.count), 60), 'eqiad')",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.scb1*.scores_request.count, ores.scb1*.precache_request.count), 60), 'eqiad')",
                             "textEditor": true
                         },
                         {
                             "hide": false,
                             "refId": "A",
-                            "target": "alias(scaleToSeconds(sumSeries(ores.scb*.scores_request.count, ores.scb2*.precache_request.count), 60), 'codfw')",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.scb2*.scores_request.count, ores.scb2*.precache_request.count), 60), 'codfw')",
+                            "textEditor": true
+                        },
+                        {
+                            "hide": false,
+                            "refId": "L",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.ores1*.scores_request.count, ores.ores1*.precache_request.count), 60), 'eqiad (ores)')",
+                            "textEditor": true
+                        },
+                        {
+                            "hide": false,
+                            "refId": "M",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.ores2*.scores_request.count, ores.ores2*.precache_request.count), 60), 'codfw (ores)')",
                             "textEditor": true
                         },
                         {
@@ -223,6 +235,7 @@
                         "min": false,
                         "rightSide": true,
                         "show": true,
+                        "sortDesc": true,
                         "total": false,
                         "values": true
                     },
@@ -250,6 +263,16 @@
                             "hide": false,
                             "refId": "C",
                             "target": "alias(scaleToSeconds(sumSeries(ores.scb2*.score_processed.count), 60), \"codfw\")",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "D",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.ores1*.score_processed.count), 60), \"eqiad (ores)\")",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "E",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.ores2*.score_processed.count), 60), \"codfw (ores)\")",
                             "textEditor": true
                         },
                         {
@@ -346,6 +369,18 @@
                         },
                         {
                             "hide": false,
+                            "refId": "D",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.ores1*.precache_request.count), 60), \"eqiad (ores)\")",
+                            "textEditor": true
+                        },
+                        {
+                            "hide": false,
+                            "refId": "E",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.ores2*.precache_request.count), 60), \"codfw (ores)\")",
+                            "textEditor": true
+                        },
+                        {
+                            "hide": false,
                             "refId": "B",
                             "target": "aliasByNode(scaleToSeconds(ores.*.precache_request.count, 60), 1)",
                             "textEditor": true
@@ -426,19 +461,25 @@
                         {
                             "hide": false,
                             "refId": "A",
-                            "target": "alias(scaleToSeconds(sumSeries(ores.scb1*.score_errored.rate), 60), \"eqiad\")",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.scb1*.score_errored.rate), 60)), 180), \"eqiad\")",
                             "textEditor": true
                         },
                         {
                             "hide": false,
                             "refId": "C",
-                            "target": "alias(scaleToSeconds(sumSeries(ores.scb2*.score_errored.rate), 60), \"codfw\")",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.scb2*.score_errored.rate), 60)), 180), \"codfw\")",
+                            "textEditor": true
+                        },
+                        {
+                            "hide": false,
+                            "refId": "E",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.ores1*.score_errored.rate), 60)), 180), \"eqiad (ores)\")",
                             "textEditor": true
                         },
                         {
                             "hide": false,
                             "refId": "B",
-                            "target": "aliasByNode(scaleToSeconds(ores.scb*.score_errored.rate, 60), 1)",
+                            "target": "aliasByNode(movingAverage(transformNull(scaleToSeconds(ores.*.score_errored.rate, 60)), 180), 1)",
                             "textEditor": true
                         }
                     ],
@@ -529,8 +570,14 @@
                         },
                         {
                             "hide": false,
+                            "refId": "D",
+                            "target": "alias(scaleToSeconds(sumSeries(ores.ores1*.scores_request.count), 60), \"eqiad (ores)\")",
+                            "textEditor": true
+                        },
+                        {
+                            "hide": false,
                             "refId": "B",
-                            "target": "aliasByNode(scaleToSeconds(ores.scb*.scores_request.count, 60), 1)",
+                            "target": "aliasByNode(scaleToSeconds(ores.*.scores_request.count, 60), 1)",
                             "textEditor": true
                         }
                     ],
@@ -617,6 +664,11 @@
                             "textEditor": true
                         },
                         {
+                            "refId": "D",
+                            "target": "alias(scale(sumSeries(ores.ores1*.score_processor_overloaded.rate), 60), \"eqiad (ores)\")",
+                            "textEditor": true
+                        },
+                        {
                             "refId": "A",
                             "target": "aliasByNode(scale(ores.*.score_processor_overloaded.rate, 60), 1)",
                             "textEditor": true
@@ -644,9 +696,9 @@
                         {
                             "format": "short",
                             "label": "per minute",
-                            "logBase": 1,
+                            "logBase": 10,
                             "max": null,
-                            "min": 0,
+                            "min": "0",
                             "show": true
                         },
                         {
@@ -696,17 +748,22 @@
                     "targets": [
                         {
                             "refId": "A",
-                            "target": "alias(scaleToSeconds(sumSeries(ores.scb1*.score_timed_out.count), 60), \"eqiad\")",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.scb1*.score_timed_out.count), 60)), 180), \"eqiad\")",
                             "textEditor": true
                         },
                         {
                             "refId": "C",
-                            "target": "alias(scaleToSeconds(sumSeries(ores.scb2*.score_timed_out.count), 60), \"codfw\")",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.scb2*.score_timed_out.count), 60)), 180), \"codfw\")",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "D",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.ores1*.score_timed_out.count), 60)), 180), \"eqiad (ores)\")",
                             "textEditor": true
                         },
                         {
                             "refId": "B",
-                            "target": "aliasByNode(scaleToSeconds(ores.scb*.score_timed_out.count, 60), 1)",
+                            "target": "aliasByNode(movingAverage(transformNull(scaleToSeconds(ores.*.score_timed_out.count, 60)), 180), 1)",
                             "textEditor": true
                         }
                     ],
@@ -785,12 +842,22 @@
                     "targets": [
                         {
                             "refId": "A",
-                            "target": "alias(movingAverage(divideSeries(sumSeries(ores.scb1*.score_cache_hit.count), sumSeries(sumSeries(ores.scb1*.score_cache_hit.count, ores.scb1*.score_cache_miss.count))), 30), \"eqiad\")",
+                            "target": "alias(movingAverage(divideSeries(sumSeries(ores.scb1*.score_cache_hit.count), sumSeries(ores.scb1*.score_cache_*.count)), 30), \"eqiad\")",
                             "textEditor": true
                         },
                         {
                             "refId": "B",
-                            "target": "alias(movingAverage(divideSeries(sumSeries(ores.scb2*.score_cache_hit.count), sumSeries(sumSeries(ores.scb2*.score_cache_hit.count, ores.scb2*.score_cache_miss.count))), 30), \"codfw\")",
+                            "target": "alias(movingAverage(divideSeries(sumSeries(ores.scb2*.score_cache_hit.count), sumSeries(ores.scb2*.score_cache_*.count)), 30), \"codfw\")",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "C",
+                            "target": "alias(movingAverage(divideSeries(sumSeries(ores.ores1*.score_cache_hit.count), sumSeries(ores.ores1*.score_cache_*.count)), 30), \"eqiad (ores)\")",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "D",
+                            "target": "",
                             "textEditor": true
                         }
                     ],
@@ -817,7 +884,7 @@
                             "format": "short",
                             "label": "Cache hits \/ Request ",
                             "logBase": 1,
-                            "max": null,
+                            "max": "1",
                             "min": null,
                             "show": true
                         },
@@ -835,91 +902,14 @@
             "repeat": null,
             "repeatIteration": null,
             "repeatRowId": null,
-            "showTitle": false,
-            "title": "New row",
+            "showTitle": true,
+            "title": "Scores",
             "titleSize": "h6"
         },
         {
-            "collapse": false,
+            "collapse": true,
             "height": "250px",
             "panels": [
-                {
-                    "aliasColors": [],
-                    "bars": false,
-                    "dashLength": 10,
-                    "dashes": false,
-                    "datasource": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 0,
-                    "grid": [],
-                    "id": 5,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": true,
-                        "max": true,
-                        "min": false,
-                        "rightSide": true,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 1,
-                    "links": [],
-                    "nullPointMode": "connected",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "spaceLength": 10,
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "refId": "A",
-                            "target": "aliasByNode(servers.scb*.cpu.total.user, 1)",
-                            "textEditor": false
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "User CPU usage (SCB machines)",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "cumulative"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "buckets": null,
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "percent",
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        }
-                    ]
-                },
                 {
                     "aliasColors": [],
                     "bars": false,
@@ -1002,12 +992,62 @@
                             "refId": "I",
                             "target": "aliasByNode(diffSeries(servers.scb2005.memory.MemTotal, servers.scb2005.memory.MemFree), 1)",
                             "textEditor": true
+                        },
+                        {
+                            "refId": "J",
+                            "target": "aliasByNode(diffSeries(servers.scb2006.memory.MemTotal, servers.scb2006.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "K",
+                            "target": "aliasByNode(diffSeries(servers.ores1001.memory.MemTotal, servers.ores1001.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "L",
+                            "target": "aliasByNode(diffSeries(servers.ores1002.memory.MemTotal, servers.ores1002.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "M",
+                            "target": "aliasByNode(diffSeries(servers.ores1003.memory.MemTotal, servers.ores1003.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "N",
+                            "target": "aliasByNode(diffSeries(servers.ores1004.memory.MemTotal, servers.ores1004.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "O",
+                            "target": "aliasByNode(diffSeries(servers.ores1005.memory.MemTotal, servers.ores1005.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "P",
+                            "target": "aliasByNode(diffSeries(servers.ores1006.memory.MemTotal, servers.ores1006.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "Q",
+                            "target": "aliasByNode(diffSeries(servers.ores1007.memory.MemTotal, servers.ores1007.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "R",
+                            "target": "aliasByNode(diffSeries(servers.ores1008.memory.MemTotal, servers.ores1008.memory.MemFree), 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "S",
+                            "target": "aliasByNode(diffSeries(servers.ores1009.memory.MemTotal, servers.ores1009.memory.MemFree), 1)",
+                            "textEditor": true
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Available memory (SCB machines)",
+                    "title": "Available memory",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
@@ -1039,19 +1079,7 @@
                             "show": true
                         }
                     ]
-                }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "New row",
-            "titleSize": "h6"
-        },
-        {
-            "collapse": false,
-            "height": "250px",
-            "panels": [
+                },
                 {
                     "aliasColors": [],
                     "bars": false,
@@ -1090,12 +1118,22 @@
                     "targets": [
                         {
                             "refId": "A",
-                            "target": "alias(sumSeries(ores.scb*.uwsgi.core.busy_workers), \"combined\")",
+                            "target": "alias(sumSeries(ores.scb1*.uwsgi.core.busy_workers), \"eqiad\")",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "C",
+                            "target": "alias(sumSeries(ores.scb2*.uwsgi.core.busy_workers), \"codfw\")",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "D",
+                            "target": "alias(sumSeries(ores.ores1*.uwsgi.core.busy_workers), \"eqiad (ores)\")",
                             "textEditor": true
                         },
                         {
                             "refId": "B",
-                            "target": "aliasByNode(ores.scb*.uwsgi.core.busy_workers, 1)",
+                            "target": "aliasByNode(ores.*.uwsgi.core.busy_workers, 1)",
                             "textEditor": true
                         }
                     ],
@@ -1144,6 +1182,88 @@
                     "datasource": null,
                     "editable": true,
                     "error": false,
+                    "fill": 0,
+                    "grid": [],
+                    "id": 5,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": true,
+                        "max": true,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 1,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "spaceLength": 10,
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "refId": "A",
+                            "target": "aliasByNode(servers.scb*.cpu.total.user, 1)",
+                            "textEditor": false
+                        },
+                        {
+                            "refId": "B",
+                            "target": "aliasByNode(servers.ores*.cpu.total.user, 1)",
+                            "textEditor": false
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "User CPU usage",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "buckets": null,
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "percent",
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                },
+                {
+                    "aliasColors": [],
+                    "bars": false,
+                    "dashLength": 10,
+                    "dashes": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
                     "fill": 1,
                     "grid": [],
                     "id": 14,
@@ -1175,6 +1295,11 @@
                         {
                             "refId": "A",
                             "target": "aliasByNode(ores.scb*.uwsgi.rss_size.mean, 1)",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "B",
+                            "target": "aliasByNode(ores.ores*.uwsgi.rss_size.mean, 1)",
                             "textEditor": true
                         }
                     ],
@@ -1214,7 +1339,19 @@
                             "show": true
                         }
                     ]
-                },
+                }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": true,
+            "title": "Resource Usage",
+            "titleSize": "h6"
+        },
+        {
+            "collapse": false,
+            "height": "250px",
+            "panels": [
                 {
                     "aliasColors": [],
                     "bars": false,
@@ -1254,32 +1391,32 @@
                     "targets": [
                         {
                             "refId": "B",
-                            "target": "alias(changeprop.internal-startup.ores-cache-1_exec.median, \"median (eqiad)\")",
+                            "target": "alias(movingAverage(changeprop.internal-startup.ores-cache-1_exec.median, 25), \"median (eqiad)\")",
                             "textEditor": true
                         },
                         {
                             "refId": "A",
-                            "target": "alias(changeprop.internal-startup.ores-cache-1_exec.p75, \"75% (eqiad)\")",
+                            "target": "alias(movingAverage(changeprop.internal-startup.ores-cache-1_exec.p75, 25), \"75% (eqiad)\")",
                             "textEditor": true
                         },
                         {
                             "refId": "C",
-                            "target": "alias(changeprop.internal-startup.ores-cache-1_exec.p95, \"95% (eqiad)\")",
+                            "target": "alias(movingAverage(changeprop.internal-startup.ores-cache-1_exec.p95, 25), \"95% (eqiad)\")",
                             "textEditor": true
                         },
                         {
                             "refId": "D",
-                            "target": "alias(changeprop.internal-startup.ores-cache-2_exec.median, \"median (codfw)\")",
+                            "target": "alias(movingAverage(changeprop.internal-startup.ores-cache-2_exec.median, 25), \"median (codfw)\")",
                             "textEditor": true
                         },
                         {
                             "refId": "E",
-                            "target": "alias(changeprop.internal-startup.ores-cache-2_exec.p75, \"75% (codfw)\")",
+                            "target": "alias(movingAverage(changeprop.internal-startup.ores-cache-2_exec.p75, 25), \"75% (codfw)\")",
                             "textEditor": true
                         },
                         {
                             "refId": "F",
-                            "target": "alias(changeprop.internal-startup.ores-cache-2_exec.p95, \"95% (codfw)\")",
+                            "target": "alias(movingAverage(changeprop.internal-startup.ores-cache-2_exec.p95, 25), \"95% (codfw)\")",
                             "textEditor": true
                         }
                     ],
@@ -1319,17 +1456,169 @@
                             "show": true
                         }
                     ]
+                },
+                {
+                    "alert": {
+                        "conditions": [
+                            {
+                                "evaluator": {
+                                    "params": [
+                                        5
+                                    ],
+                                    "type": "gt"
+                                },
+                                "operator": {
+                                    "type": "and"
+                                },
+                                "query": {
+                                    "params": [
+                                        "A",
+                                        "15m",
+                                        "now"
+                                    ]
+                                },
+                                "reducer": {
+                                    "params": [],
+                                    "type": "avg"
+                                },
+                                "type": "query"
+                            },
+                            {
+                                "evaluator": {
+                                    "params": [
+                                        5
+                                    ],
+                                    "type": "gt"
+                                },
+                                "operator": {
+                                    "type": "or"
+                                },
+                                "query": {
+                                    "params": [
+                                        "B",
+                                        "15m",
+                                        "now"
+                                    ]
+                                },
+                                "reducer": {
+                                    "params": [],
+                                    "type": "avg"
+                                },
+                                "type": "query"
+                            }
+                        ],
+                        "executionErrorState": "keep_state",
+                        "frequency": "60s",
+                        "handler": 1,
+                        "name": "5xx rate (Change prop) alert",
+                        "noDataState": "ok",
+                        "notifications": []
+                    },
+                    "aliasColors": [],
+                    "bars": false,
+                    "dashLength": 10,
+                    "dashes": false,
+                    "datasource": null,
+                    "decimals": 2,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": [],
+                    "id": 23,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": true,
+                        "hideEmpty": false,
+                        "max": true,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 1,
+                    "links": [],
+                    "nullPointMode": "null as zero",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "spaceLength": 10,
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "refId": "B",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(changeprop.internal-startup.ores-cache-1-retry_exec.count, 60)), 180), \"eqiad\")",
+                            "textEditor": true
+                        },
+                        {
+                            "refId": "A",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(changeprop.internal-startup.ores-cache-2-retry_exec.count, 60)), 180), \"codfw\")",
+                            "textEditor": true
+                        }
+                    ],
+                    "thresholds": [
+                        {
+                            "colorMode": "critical",
+                            "fill": true,
+                            "line": true,
+                            "op": "gt",
+                            "value": 5
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "5xx rate (Change prop)",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": false,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "buckets": null,
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": [
+                            "total"
+                        ]
+                    },
+                    "yaxes": [
+                        {
+                            "format": "none",
+                            "label": "5xx errors per minute",
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": false
+                        }
+                    ]
                 }
             ],
             "repeat": null,
             "repeatIteration": null,
             "repeatRowId": null,
-            "showTitle": false,
-            "title": "New row",
+            "showTitle": true,
+            "title": "Changeprop",
             "titleSize": "h6"
         },
         {
-            "collapse": false,
+            "collapse": true,
             "height": 250,
             "panels": [
                 {
@@ -1343,15 +1632,15 @@
                     "fill": 1,
                     "id": 16,
                     "legend": {
-                        "alignAsTable": false,
+                        "alignAsTable": true,
                         "avg": false,
-                        "current": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
+                        "current": true,
+                        "max": true,
+                        "min": true,
+                        "rightSide": true,
                         "show": true,
                         "total": false,
-                        "values": false
+                        "values": true
                     },
                     "lines": true,
                     "linewidth": 1,
@@ -1363,96 +1652,20 @@
                     "renderer": "flot",
                     "seriesOverrides": [],
                     "spaceLength": 10,
-                    "span": 3,
+                    "span": 6,
                     "stack": false,
                     "steppedLine": false,
                     "targets": [
                         {
                             "refId": "A",
-                            "target": "aliasByNode(scale(servers.oresrdb1001.redis.*.memory.internal_view, 1e-9), 3)"
+                            "target": "aliasByNode(scale(servers.ores*.redis.*.memory.internal_view, 1e-9), 1, 3)",
+                            "textEditor": true
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Redis Memory Usage oresrdb1001",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "buckets": null,
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "label": "GB",
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": [],
-                    "bars": false,
-                    "dashLength": 10,
-                    "dashes": false,
-                    "datasource": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 1,
-                    "id": 17,
-                    "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
-                        "current": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 1,
-                    "links": [],
-                    "nullPointMode": "connected",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "spaceLength": 10,
-                    "span": 3,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "refId": "A",
-                            "target": "aliasByNode(scale(servers.oresrdb1002.redis.*.memory.internal_view, 1e-9), 3)"
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Redis Memory Usage oresrdb1002",
+                    "title": "Redis Memory Usage",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
@@ -1497,13 +1710,15 @@
                     "fill": 1,
                     "id": 18,
                     "legend": {
-                        "avg": false,
-                        "current": false,
-                        "max": false,
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": true,
+                        "max": true,
                         "min": false,
+                        "rightSide": true,
                         "show": true,
                         "total": false,
-                        "values": false
+                        "values": true
                     },
                     "lines": true,
                     "linewidth": 1,
@@ -1515,19 +1730,19 @@
                     "renderer": "flot",
                     "seriesOverrides": [],
                     "spaceLength": 10,
-                    "span": 3,
+                    "span": 6,
                     "stack": false,
                     "steppedLine": false,
                     "targets": [
                         {
                             "refId": "A",
-                            "target": "aliasByNode(servers.oresrdb1001.redis.*.clients.connected, 3)"
+                            "target": "aliasByNode(servers.ores*.redis.*.clients.connected, 1, 3)"
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Redis connected clients oresrdb1001",
+                    "title": "Redis connected clients",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
@@ -1546,235 +1761,6 @@
                         {
                             "format": "short",
                             "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": [],
-                    "bars": false,
-                    "dashLength": 10,
-                    "dashes": false,
-                    "datasource": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 1,
-                    "id": 19,
-                    "legend": {
-                        "avg": false,
-                        "current": false,
-                        "max": false,
-                        "min": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 1,
-                    "links": [],
-                    "nullPointMode": "connected",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "spaceLength": 10,
-                    "span": 3,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "refId": "A",
-                            "target": "aliasByNode(servers.oresrdb1002.redis.*.clients.connected, 3)"
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Redis connected clients oresrdb1002",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "buckets": null,
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": [],
-                    "bars": false,
-                    "dashLength": 10,
-                    "dashes": false,
-                    "datasource": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 1,
-                    "id": 20,
-                    "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
-                        "current": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 1,
-                    "links": [],
-                    "nullPointMode": "connected",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "spaceLength": 10,
-                    "span": 3,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "refId": "A",
-                            "target": "aliasByNode(scale(servers.oresrdb2001.redis.*.memory.internal_view, 1e-9), 3)"
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Redis Memory Usage oresrdb2001",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "buckets": null,
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "label": "GB",
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": [],
-                    "bars": false,
-                    "dashLength": 10,
-                    "dashes": false,
-                    "datasource": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 1,
-                    "id": 21,
-                    "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
-                        "current": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 1,
-                    "links": [],
-                    "nullPointMode": "connected",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "spaceLength": 10,
-                    "span": 3,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "refId": "A",
-                            "target": "aliasByNode(scale(servers.oresrdb2002.redis.*.memory.internal_view, 1e-9), 3)"
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Redis Memory Usage oresrdb2002",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "buckets": null,
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "label": "GB",
                             "logBase": 1,
                             "max": null,
                             "min": null,
@@ -1801,13 +1787,15 @@
                     "fill": 1,
                     "id": 22,
                     "legend": {
-                        "avg": false,
-                        "current": false,
-                        "max": false,
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": true,
+                        "max": true,
                         "min": false,
+                        "rightSide": true,
                         "show": true,
                         "total": false,
-                        "values": false
+                        "values": true
                     },
                     "lines": true,
                     "linewidth": 1,
@@ -1819,94 +1807,19 @@
                     "renderer": "flot",
                     "seriesOverrides": [],
                     "spaceLength": 10,
-                    "span": 3,
+                    "span": 6,
                     "stack": false,
                     "steppedLine": false,
                     "targets": [
                         {
                             "refId": "A",
-                            "target": "aliasByNode(servers.oresrdb2001.redis.*.clients.connected, 3)"
+                            "target": "aliasByNode(servers.ores*.redis.*.db0.keys, 1, 3)"
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Redis connected clients oresrdb2001",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "buckets": null,
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": [],
-                    "bars": false,
-                    "dashLength": 10,
-                    "dashes": false,
-                    "datasource": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 1,
-                    "id": 23,
-                    "legend": {
-                        "avg": false,
-                        "current": false,
-                        "max": false,
-                        "min": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 1,
-                    "links": [],
-                    "nullPointMode": "connected",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "spaceLength": 10,
-                    "span": 3,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "refId": "A",
-                            "target": "aliasByNode(servers.oresrdb2002.redis.*.clients.connected, 3)"
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Redis connected clients oresrdb2002",
+                    "title": "Redis # of keys",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
@@ -1944,7 +1857,7 @@
             "repeat": null,
             "repeatIteration": null,
             "repeatRowId": null,
-            "showTitle": false,
+            "showTitle": true,
             "title": "Redis",
             "titleSize": "h6"
         }
@@ -1958,14 +1871,15 @@
         "list": []
     },
     "time": {
-        "from": "now-1h",
-        "to": "now"
+        "from": "now-24h",
+        "to": "now-1m"
     },
     "timepicker": {
         "collapse": false,
         "enable": true,
         "notice": false,
         "now": true,
+        "nowDelay": "1m",
         "refresh_intervals": [
             "5s",
             "10s",
@@ -1994,5 +1908,5 @@
     },
     "timezone": "utc",
     "title": "ORES",
-    "version": 89
+    "version": 106
 }
