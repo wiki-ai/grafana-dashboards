@@ -75,7 +75,7 @@
     "refresh": false,
     "rows": [
         {
-            "collapse": true,
+            "collapse": false,
             "height": "250px",
             "panels": [
                 {
@@ -471,25 +471,25 @@
                         {
                             "hide": false,
                             "refId": "A",
-                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.scb1*.score_errored.rate), 60)), 180), \"eqiad\")",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.scb1*.score_errored.rate), 60)), \"3min\"), \"eqiad\")",
                             "textEditor": true
                         },
                         {
                             "hide": false,
                             "refId": "C",
-                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.scb2*.score_errored.rate), 60)), 180), \"codfw\")",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.scb2*.score_errored.rate), 60)), \"3min\"), \"codfw\")",
                             "textEditor": true
                         },
                         {
                             "hide": false,
                             "refId": "E",
-                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.ores1*.score_errored.rate), 60)), 180), \"eqiad (ores)\")",
+                            "target": "alias(movingAverage(transformNull(scaleToSeconds(sumSeries(ores.ores1*.score_errored.rate), 60)), \"3min\"), \"eqiad (ores)\")",
                             "textEditor": true
                         },
                         {
                             "hide": false,
                             "refId": "B",
-                            "target": "aliasByNode(movingAverage(transformNull(scaleToSeconds(ores.*.score_errored.rate, 60)), 180), 1)",
+                            "target": "aliasByNode(movingAverage(transformNull(scaleToSeconds(ores.*.score_errored.rate, 60)), \"3min\"), 1)",
                             "textEditor": true
                         }
                     ],
@@ -917,7 +917,7 @@
             "titleSize": "h6"
         },
         {
-            "collapse": true,
+            "collapse": false,
             "height": "250px",
             "panels": [
                 {
@@ -1920,5 +1920,5 @@
     },
     "timezone": "utc",
     "title": "ORES",
-    "version": 107
+    "version": 108
 }
